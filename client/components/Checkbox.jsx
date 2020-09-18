@@ -34,7 +34,9 @@ function Checkbox() {
     <>
       <div>
         <p>You clicked {count} times</p>
-        <button onClick={() => setCount(count + 1)}>
+        <button 
+          style={{ background: "black", color: "white" }}
+          onClick={() => setCount(count + 1)}>
           Click me
       </button>
       </div>
@@ -55,3 +57,14 @@ export default Checkbox
 
 
 //https://reactjs.org/docs/hooks-state.html
+
+// if(i & 1)
+// {
+//     // ODD
+// }
+// else
+// {
+//     // EVEN
+// }
+
+//Ternary: i & 1 == 1 ? console.log("odd") : console.log("even");

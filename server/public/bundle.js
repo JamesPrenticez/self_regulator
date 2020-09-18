@@ -153,6 +153,10 @@ function Checkbox() {
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You clicked ", count, " times"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    style: {
+      background: "black",
+      color: "white"
+    },
     onClick: () => setCount(count + 1)
   }, "Click me")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You button color is ", color), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "button",
@@ -168,6 +172,15 @@ function Checkbox() {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Checkbox); //https://reactjs.org/docs/hooks-state.html
+// if(i & 1)
+// {
+//     // ODD
+// }
+// else
+// {
+//     // EVEN
+// }
+//Ternary: i & 1 == 1 ? console.log("odd") : console.log("even");
 
 /***/ }),
 

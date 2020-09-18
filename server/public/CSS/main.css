@@ -2,12 +2,24 @@ body{
     background-color: antiquewhite;
 }
 
-button{
-    width: 75px;
-    height: 75px;
-    margin: 10px;
-
+button {
+    border: none;
+    height: 40px;
+    padding: 5px 15px;
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 10px;
+    margin-right: 10px;
     border-radius: 5px;
+}
+
+button:hover{
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+button:focus{
+    outline:0;
 }
 
 .blackButton{
@@ -19,3 +31,4 @@ button{
     background-color: white;
     color: black;
 }
+
