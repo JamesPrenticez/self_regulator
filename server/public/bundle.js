@@ -97,13 +97,77 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Checkbox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Checkbox */ "./client/components/Checkbox.jsx");
+
 
 
 const App = () => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Discipline has begun");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Discipline has begun"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Checkbox__WEBPACK_IMPORTED_MODULE_1__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./client/components/Checkbox.jsx":
+/*!****************************************!*\
+  !*** ./client/components/Checkbox.jsx ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function Checkbox() {
+  // Declare a new state variable, which we'll call "count"
+  //var color = ['black', 'green', 'red']
+  //Button 1
+  const [count, setCount] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(1); //Button 2
+
+  const [color, setColor] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('green');
+  const [textColor, setTextColor] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('yellow');
+
+  function isEven(n) {
+    return n % 2 == 0;
+  }
+
+  function isOdd(n) {
+    return Math.abs(n % 2) == 1;
+  }
+
+  const button = () => {
+    console.log(count);
+    console.log(color);
+
+    if (isEven(count) == true) {
+      setColor('green');
+    } else if (isOdd(count) == true) {
+      setColor('red');
+    }
+
+    console.log(isEven(count));
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You clicked ", count, " times"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: () => setCount(count + 1)
+  }, "Click me")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You button color is ", color), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "button",
+    style: {
+      background: color,
+      color: textColor
+    },
+    onClick: () => {
+      button();
+      setCount(count + 1);
+    }
+  }, "Click here")));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Checkbox); //https://reactjs.org/docs/hooks-state.html
 
 /***/ }),
 

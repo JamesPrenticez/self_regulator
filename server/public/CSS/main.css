@@ -1,0 +1,21 @@
+body{
+    background-color: antiquewhite;
+}
+
+button{
+    width: 75px;
+    height: 75px;
+    margin: 10px;
+
+    border-radius: 5px;
+}
+
+.blackButton{
+    background-color: black;
+    color: white;
+}
+
+.whiteButton{
+    background-color: white;
+    color: black;
+}
