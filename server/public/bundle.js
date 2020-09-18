@@ -123,64 +123,40 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Checkbox() {
-  // Declare a new state variable, which we'll call "count"
-  //var color = ['black', 'green', 'red']
-  //Button 1
-  const [count, setCount] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(1); //Button 2
+  const [count, setCount] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(1);
+  const [className, setClassName] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('neutral');
+  const [marker, setMarker] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('neutral');
 
-  const [color, setColor] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('green');
-  const [textColor, setTextColor] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('yellow');
-
-  function isEven(n) {
-    return n % 2 == 0;
-  }
-
-  function isOdd(n) {
-    return Math.abs(n % 2) == 1;
-  }
-
-  const button = () => {
-    console.log(count);
-    console.log(color);
-
-    if (isEven(count) == true) {
-      setColor('green');
-    } else if (isOdd(count) == true) {
-      setColor('red');
+  const superButton = () => {
+    if (count == 0) {
+      setClassName('neutral');
+      setMarker('neutral');
+    } else if (count == 1) {
+      setClassName('pass');
+      setMarker('pass');
+    } else if (count == 2) {
+      setClassName('fail');
+      setMarker('fail');
     }
-
-    console.log(isEven(count));
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You clicked ", count, " times"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    style: {
-      background: "black",
-      color: "white"
-    },
-    onClick: () => setCount(count + 1)
-  }, "Click me")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You button color is ", color), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "button",
-    style: {
-      background: color,
-      color: textColor
-    },
-    onClick: () => {
-      button();
-      setCount(count + 1);
+  const resetCount = () => {
+    if (count >= 2) {
+      setCount(0);
     }
-  }, "Click here")));
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Super Button"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: className,
+    onClick: () => {
+      superButton();
+      setCount(count + 1);
+      resetCount();
+    }
+  }, marker)));
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Checkbox); //https://reactjs.org/docs/hooks-state.html
-// if(i & 1)
-// {
-//     // ODD
-// }
-// else
-// {
-//     // EVEN
-// }
-//Ternary: i & 1 == 1 ? console.log("odd") : console.log("even");
+/* harmony default export */ __webpack_exports__["default"] = (Checkbox);
 
 /***/ }),
 

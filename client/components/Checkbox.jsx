@@ -1,52 +1,36 @@
 import React, { useState } from 'react';
 
 function Checkbox() {
-  // Declare a new state variable, which we'll call "count"
-  //var color = ['black', 'green', 'red']
-
-  //Button 1
   const [count, setCount] = useState(1);
+  const [className, setClassName] = useState('neutral');
+  const [marker, setMarker] = useState('neutral');
 
-  //Button 2
-  const [color, setColor] = useState('green');
-  const [textColor, setTextColor] = useState('yellow');
-
-  function isEven(n) {
-    return n % 2 == 0;
+  const superButton = () => {
+      if (count == 0) {
+        setClassName('neutral')
+        setMarker('neutral')
+      } else if (count == 1) {
+        setClassName('pass')
+        setMarker('pass')
+      } else if (count == 2) {
+        setClassName('fail')
+        setMarker('fail')
+      } 
   }
 
-  function isOdd(n) {
-    return Math.abs(n % 2) == 1;
-  }
-
-  const button = () => {
-    console.log(count)
-    console.log(color)
-    if (isEven(count) == true) {
-      setColor('green')
-    } else if (isOdd(count) == true) {
-      setColor('red')
+  const resetCount = () => {
+    if (count >= 2) {
+    setCount(0)
     }
-    console.log(isEven(count))
   }
 
   return (
     <>
       <div>
-        <p>You clicked {count} times</p>
-        <button 
-          style={{ background: "black", color: "white" }}
-          onClick={() => setCount(count + 1)}>
-          Click me
-      </button>
-      </div>
-
-      <div>
-        <p>You button color is {color}</p>
-        <button className='button'
-          style={{ background: color, color: textColor }}
-          onClick={() => {button(); setCount(count + 1) }}>
-          Click here
+        <h3>Super Button</h3>
+        <button className={className}
+          onClick={() => {superButton(); setCount(count + 1); resetCount()}}>
+          {marker}
       </button>
       </div>
     </>
@@ -56,15 +40,3 @@ function Checkbox() {
 export default Checkbox
 
 
-//https://reactjs.org/docs/hooks-state.html
-
-// if(i & 1)
-// {
-//     // ODD
-// }
-// else
-// {
-//     // EVEN
-// }
-
-//Ternary: i & 1 == 1 ? console.log("odd") : console.log("even");
