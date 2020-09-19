@@ -4,7 +4,8 @@ const connection = require('knex')(config)
 
 module.exports = {
     getUsers,
-    getTasks
+    getTasks,
+    getBoxes
 }
 
 function getUsers (db = connection) {
@@ -13,4 +14,18 @@ function getUsers (db = connection) {
 
 function getTasks (db = connection) {
   return db('tasks').select()
+}
+
+function getBoxes (id, db = connection){
+  return db('tasks')
+    .select('boxes')
+    .where('user_id', id)
+    //.then(parse)
+} 
+
+// JSON.parse()
+
+function parse(stuff) {
+  stuff.boxes = JSON.parse(stuff.boxes)
+  return stuff
 }
