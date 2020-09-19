@@ -3,7 +3,7 @@ exports.up = (knex, Promise) => {
     table.integer('user_id').references('users.id')
     table.increments('id') 
     table.string('task')
-    table.string('boxs')
+    table.string('boxes')
     })
 };
 

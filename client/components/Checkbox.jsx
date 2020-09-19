@@ -27,14 +27,6 @@ function Checkbox() {
   return (
     <>
       <div>
-        <h3>Super Button</h3>
-        <button className={className}
-          onClick={() => {superButton(); setCount(count + 1); resetCount()}}>
-          {marker}
-      </button>
-      </div>
-      <div>
-        <h3>Super Button</h3>
         <button className={className}
           onClick={() => {superButton(); setCount(count + 1); resetCount()}}>
           {marker}

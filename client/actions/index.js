@@ -10,9 +10,9 @@ export const receiveUsers = (users) => {
   }
 }
 
-export const receiveTasks = (tasks) => {
+export const receiveTasks = (task) => {
   return {
     type: RECEIVE_TASKS,
-    tasks
+    task
   }
 }
