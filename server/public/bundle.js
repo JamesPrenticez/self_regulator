@@ -110,10 +110,10 @@ const receiveUsers = users => {
     users
   };
 };
-const receiveTasks = task => {
+const receiveTasks = tasks => {
   return {
     type: RECEIVE_TASKS,
-    task
+    tasks
   };
 };
 
@@ -136,9 +136,8 @@ __webpack_require__.r(__webpack_exports__);
 function fetchUsers() {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/users').then(res => res.body.users);
 }
-function fetchTasks(tasks) {
-  console.log(tasks);
-  return superagent__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/tasks').then(res => res.body.tasks); //tasks?
+function fetchTasks() {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/tasks').then(res => res.body.tasks);
 }
 
 /***/ }),
@@ -219,43 +218,6 @@ function Checkbox() {
 
 /***/ }),
 
-/***/ "./client/components/taskListItem.jsx":
-/*!********************************************!*\
-  !*** ./client/components/taskListItem.jsx ***!
-  \********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-
-
-function TaskListItem({
-  toDo,
-  dispatch
-}) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "task"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "name"
-  }, toDo.task), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "description"
-  }, toDo.user_id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "boxes"
-  }, toDo.boxes));
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])()(TaskListItem));
-{
-  /* <a href="#" className="cart-link" onClick={() => dispatch(addToCart(wine.id, wine.name))}>Add to cart</a> */
-}
-
-/***/ }),
-
 /***/ "./client/components/tasksList.jsx":
 /*!*****************************************!*\
   !*** ./client/components/tasksList.jsx ***!
@@ -270,26 +232,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../api */ "./client/api/index.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
-/* harmony import */ var _taskListItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./taskListItem */ "./client/components/taskListItem.jsx");
 
 
 
 
 
-
-class TaskList extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+class TasksList extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   componentDidMount() {
-    Object(_api__WEBPACK_IMPORTED_MODULE_2__["fetchTasks"])().then(task => {
-      this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["receiveTasks"])(task));
+    Object(_api__WEBPACK_IMPORTED_MODULE_2__["fetchTasks"])().then(tasks => {
+      this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["receiveTasks"])(tasks));
     });
   }
 
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Tasks"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.tasks.map(task => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-      key: task.id
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_taskListItem__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      task: task
-    })))));
+    console.log(this.props.tasks);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Task List"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.tasks.map(list => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: list.id
+    }, list.task, " ", list.boxes)))));
   }
 
 }
@@ -300,7 +259,7 @@ function mapStateToProps(state) {
   };
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(TaskList));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(TasksList));
 
 /***/ }),
 

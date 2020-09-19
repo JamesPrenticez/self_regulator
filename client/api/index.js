@@ -6,9 +6,8 @@ export function fetchUsers() {
         .then(res => res.body.users)
 }
 
-export function fetchTasks(tasks) {
-    console.log(tasks)
+export function fetchTasks() {
     return request  
         .get('/api/tasks')
-        .then(res => res.body.tasks)//tasks?
+        .then(res => res.body.tasks)
 }
