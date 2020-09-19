@@ -5,3 +5,9 @@ export function fetchUsers() {
         .get('/api')
         .then(res => res.body.users)
 }
+
+export function fetchTasks() {
+    return request  
+        .get('/api')
+        .then(res => res.body.tasks)//tasks?
+}

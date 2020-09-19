@@ -90,21 +90,30 @@
 /*!*********************************!*\
   !*** ./client/actions/index.js ***!
   \*********************************/
-/*! exports provided: RECEIVE_USERS, receiveUsers */
+/*! exports provided: RECEIVE_USERS, RECEIVE_TASKS, receiveUsers, receiveTasks */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USERS", function() { return RECEIVE_USERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_TASKS", function() { return RECEIVE_TASKS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUsers", function() { return receiveUsers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveTasks", function() { return receiveTasks; });
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_0__);
 
 const RECEIVE_USERS = 'RECEIVE_USERS';
+const RECEIVE_TASKS = 'RECEIVE_TASKS';
 const receiveUsers = users => {
   return {
     type: RECEIVE_USERS,
-    wines
+    users
+  };
+};
+const receiveTasks = tasks => {
+  return {
+    type: RECEIVE_TASKS,
+    tasks
   };
 };
 
@@ -234,11 +243,39 @@ document.addEventListener('DOMContentLoaded', () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users */ "./client/reducers/users.js");
+/* harmony import */ var _tasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tasks */ "./client/reducers/tasks.js");
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  users: _users__WEBPACK_IMPORTED_MODULE_1__["default"]
+  users: _users__WEBPACK_IMPORTED_MODULE_1__["default"],
+  tasks: _tasks__WEBPACK_IMPORTED_MODULE_2__["default"]
 }));
+
+/***/ }),
+
+/***/ "./client/reducers/tasks.js":
+/*!**********************************!*\
+  !*** ./client/reducers/tasks.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return tasksReducer; });
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
+
+const initialState = [];
+function tasksReducer(state = initialState, action) {
+  switch (action.type) {
+    case _actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_TASKS"]:
+      return action.tasks;
+
+    default:
+      return state;
+  }
+}
 
 /***/ }),
 
@@ -251,11 +288,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return userReducer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return usersReducer; });
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 
 const initialState = [];
-function userReducer(state = initialState, action) {
+function usersReducer(state = initialState, action) {
   switch (action.type) {
     case _actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USERS"]:
       return action.users;

@@ -1,6 +1,8 @@
 const path = require('path')
 const express = require('express')
+
 const userRoutes = require('./routes/users')
+const taskRoutes = require('./routes/tasks')
 
 const server = express()
 
@@ -11,3 +13,4 @@ module.exports = server
 
 // Routes
 server.use('/', userRoutes)
+server.use('/', taskRoutes)
