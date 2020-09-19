@@ -1,7 +1,8 @@
 import {combineReducers} from 'redux'
 
-const reducers = combineReducers({
-    test: () => (true)
+import usersReducer from './users'
+
+export default combineReducers({
+    users: usersReducer,
 })
 
-export default reducers
