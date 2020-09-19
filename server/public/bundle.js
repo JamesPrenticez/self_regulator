@@ -153,6 +153,13 @@ function Checkbox() {
       setCount(count + 1);
       resetCount();
     }
+  }, marker)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Super Button"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: className,
+    onClick: () => {
+      superButton();
+      setCount(count + 1);
+      resetCount();
+    }
   }, marker)));
 }
 
