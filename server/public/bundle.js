@@ -208,11 +208,11 @@ class Boxes extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   render() {
     var _this$props$boxes$;
 
-    console.log((_this$props$boxes$ = this.props.boxes[0]) === null || _this$props$boxes$ === void 0 ? void 0 : _this$props$boxes$.boxes[0]); //optional chaining operator
-
+    // console.log(this.props.boxes[0]?.boxes[0]) optional chaining operator (if true then keep going)
+    console.log(this.props.boxes[0]);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Task List"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.boxes.map(list => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
       key: list
-    }, "hi ", list[0])))));
+    }, list === null || list === void 0 ? void 0 : list.boxes[0]))), (_this$props$boxes$ = this.props.boxes[0]) === null || _this$props$boxes$ === void 0 ? void 0 : _this$props$boxes$.boxes[0]));
   }
 
 }

@@ -13,12 +13,16 @@ class Boxes extends React.Component {
     }
 
     render() {
-        console.log(this.props.boxes[0]?.boxes[0])//optional chaining operator
+        // console.log(this.props.boxes[0]?.boxes[0]) optional chaining operator (if true then keep going)
+        console.log(this.props.boxes[0])
         return (
             <>
             <div>
                 <h4>Task List</h4>
-                <ul>{this.props.boxes.map(list => <li key={list}>hi {list[0]}</li>)}</ul>
+                <ul>{this.props.boxes.map(list => <li key={list}>{list?.boxes[0]}</li>)}</ul>
+
+                {this.props.boxes[0]?.boxes[0]}
+
             </div>     
             </>
         )
