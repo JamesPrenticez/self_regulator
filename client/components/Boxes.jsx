@@ -13,7 +13,7 @@ class Boxes extends React.Component {
     }
 
     render() {
-        console.log(this.props.boxes)
+        console.log(this.props.boxes[0]?.boxes[0])//optional chaining operator
         return (
             <>
             <div>

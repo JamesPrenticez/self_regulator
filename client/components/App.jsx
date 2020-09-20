@@ -7,7 +7,7 @@ const App = () => {
   return (
     <>
     <h1>Discipline has begun</h1>
-    {/* <TaskList/> */}
+    <TaskList/>
     <Checkbox/>
     <Boxes/>
 
