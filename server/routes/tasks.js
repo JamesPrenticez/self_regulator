@@ -13,8 +13,8 @@ router.get('/api/tasks', (req, res) => {
 })
 
 //Get boxes as javascript values
-router.get('/boxes/:id', (req, res) => {
-  const id = req.params.id  
+router.get('/boxes/:id', (req, res) => { 
+  const id = 1 //req.params.id  
   db.getBoxes(id)
         .then(callback => {
         console.log(callback)

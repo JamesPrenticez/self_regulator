@@ -16,7 +16,7 @@ function getTasks (db = connection) {
   return db('tasks').select()
 }
 
-function getBoxes (id, db = connection){
+function getBoxes (id = 1, db = connection){
   return db('tasks')
     .select('boxes')
     .where('user_id', id)
@@ -24,8 +24,8 @@ function getBoxes (id, db = connection){
 } 
 
 // JSON.parse()
-
 function parse(stuff) {
+  console.log("stuff")
   console.log(stuff)
   return stuff.map(task => {
     task.boxes = JSON.parse(task.boxes)

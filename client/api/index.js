@@ -11,3 +11,9 @@ export function fetchTasks() {
         .get('/api/tasks')
         .then(res => res.body.tasks)
 }
+
+export function fetchBoxes() {
+    return request  
+        .get('/boxes/:id')
+        .then(res => res.body)//maybe just res.body?
+}

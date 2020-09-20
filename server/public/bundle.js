@@ -90,20 +90,20 @@
 /*!*********************************!*\
   !*** ./client/actions/index.js ***!
   \*********************************/
-/*! exports provided: RECEIVE_USERS, RECEIVE_TASKS, receiveUsers, receiveTasks */
+/*! exports provided: RECEIVE_USERS, RECEIVE_TASKS, RECEIVE_BOXES, receiveUsers, receiveTasks, receiveBoxes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USERS", function() { return RECEIVE_USERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_TASKS", function() { return RECEIVE_TASKS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_BOXES", function() { return RECEIVE_BOXES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUsers", function() { return receiveUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveTasks", function() { return receiveTasks; });
-/* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
-/* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_0__);
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveBoxes", function() { return receiveBoxes; });
 const RECEIVE_USERS = 'RECEIVE_USERS';
 const RECEIVE_TASKS = 'RECEIVE_TASKS';
+const RECEIVE_BOXES = 'RECEIVE_BOXES';
 const receiveUsers = users => {
   return {
     type: RECEIVE_USERS,
@@ -116,6 +116,12 @@ const receiveTasks = tasks => {
     tasks
   };
 };
+const receiveBoxes = boxes => {
+  return {
+    type: RECEIVE_BOXES,
+    boxes
+  };
+};
 
 /***/ }),
 
@@ -123,13 +129,14 @@ const receiveTasks = tasks => {
 /*!*****************************!*\
   !*** ./client/api/index.js ***!
   \*****************************/
-/*! exports provided: fetchUsers, fetchTasks */
+/*! exports provided: fetchUsers, fetchTasks, fetchBoxes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUsers", function() { return fetchUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTasks", function() { return fetchTasks; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBoxes", function() { return fetchBoxes; });
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -138,6 +145,9 @@ function fetchUsers() {
 }
 function fetchTasks() {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/tasks').then(res => res.body.tasks);
+}
+function fetchBoxes() {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default.a.get('/boxes/:id').then(res => res.body); //maybe just res.body?
 }
 
 /***/ }),
@@ -154,16 +164,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Checkbox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Checkbox */ "./client/components/Checkbox.jsx");
-/* harmony import */ var _tasksList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tasksList */ "./client/components/tasksList.jsx");
+/* harmony import */ var _TasksList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TasksList */ "./client/components/TasksList.jsx");
+/* harmony import */ var _Boxes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Boxes */ "./client/components/Boxes.jsx");
+
 
 
 
 
 const App = () => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Discipline has begun"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tasksList__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Checkbox__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Discipline has begun"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Checkbox__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Boxes__WEBPACK_IMPORTED_MODULE_3__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./client/components/Boxes.jsx":
+/*!*************************************!*\
+  !*** ./client/components/Boxes.jsx ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../api */ "./client/api/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
+
+
+
+
+
+class Boxes extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  componentDidMount() {
+    Object(_api__WEBPACK_IMPORTED_MODULE_2__["fetchBoxes"])().then(callback => {
+      this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["receiveBoxes"])(callback));
+    });
+  }
+
+  render() {
+    console.log(this.props.boxes);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Task List"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.boxes.map(list => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: list
+    }, "hi ", list[0])))));
+  }
+
+}
+
+function mapStateToProps(state) {
+  return {
+    boxes: state.boxes
+  };
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(Boxes));
 
 /***/ }),
 
@@ -218,9 +275,9 @@ function Checkbox() {
 
 /***/ }),
 
-/***/ "./client/components/tasksList.jsx":
+/***/ "./client/components/TasksList.jsx":
 /*!*****************************************!*\
-  !*** ./client/components/tasksList.jsx ***!
+  !*** ./client/components/TasksList.jsx ***!
   \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -295,6 +352,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /***/ }),
 
+/***/ "./client/reducers/boxes.js":
+/*!**********************************!*\
+  !*** ./client/reducers/boxes.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return boxesReducer; });
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
+
+const initialState = [];
+function boxesReducer(state = initialState, action) {
+  switch (action.type) {
+    case _actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BOXES"]:
+      return action.boxes;
+
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+
 /***/ "./client/reducers/index.js":
 /*!**********************************!*\
   !*** ./client/reducers/index.js ***!
@@ -307,12 +389,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users */ "./client/reducers/users.js");
 /* harmony import */ var _tasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tasks */ "./client/reducers/tasks.js");
+/* harmony import */ var _boxes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./boxes */ "./client/reducers/boxes.js");
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   users: _users__WEBPACK_IMPORTED_MODULE_1__["default"],
-  tasks: _tasks__WEBPACK_IMPORTED_MODULE_2__["default"]
+  tasks: _tasks__WEBPACK_IMPORTED_MODULE_2__["default"],
+  boxes: _boxes__WEBPACK_IMPORTED_MODULE_3__["default"]
 }));
 
 /***/ }),
