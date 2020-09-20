@@ -18,7 +18,6 @@ router.get('/boxes/:id', (req, res) => {
   db.getBoxes(id)
         .then(callback => {
         console.log(callback)
-        console.log(typeof callback)
         res.send(callback)
     })
 })
