@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {connect} from 'react-redux'
-import { CHANGE_BOX } from '../actions';
+
 
 function Checkbox(props) {
   const arr = props.data

@@ -172,14 +172,12 @@ function fetchBoxes() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Checkbox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Checkbox */ "./client/components/Checkbox.jsx");
-/* harmony import */ var _Boxes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Boxes */ "./client/components/Boxes.jsx");
-
+/* harmony import */ var _Boxes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Boxes */ "./client/components/Boxes.jsx");
 
 
 
 const App = () => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Discipline has begun"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Boxes__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Discipline has begun"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Boxes__WEBPACK_IMPORTED_MODULE_1__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -212,12 +210,34 @@ class Boxes extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
     });
   }
 
+  handelClick(currentIndex) {
+    console.log(currentIndex);
+  }
+
   render() {
-    // console.log(this.props.boxes[0]?.boxes[0]) optional chaining operator (if true then keep going)
-    //console.log(this.props.boxes[0])
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.boxes.map(list => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-      key: list
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, list.boxes[0]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, list.boxes[1]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, list.boxes[2]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, list.boxes[3]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, list.boxes[4]))))));
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.boxes.map((list, index) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: index
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      onClick: () => {
+        this.handelClick(0);
+      }
+    }, list.boxes[0]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      onClick: () => {
+        this.handelClick(1);
+      }
+    }, list.boxes[1]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      onClick: () => {
+        this.handelClick(2);
+      }
+    }, list.boxes[2]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      onClick: () => {
+        this.handelClick(3);
+      }
+    }, list.boxes[3]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      onClick: () => {
+        this.handelClick(4);
+      }
+    }, list.boxes[4]))))));
   }
 
 }
@@ -230,105 +250,6 @@ function mapStateToProps(state) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(Boxes));
-{
-  /* {this.props.boxes[0]?.boxes[0]} */
-}
-
-/***/ }),
-
-/***/ "./client/components/Checkbox.jsx":
-/*!****************************************!*\
-  !*** ./client/components/Checkbox.jsx ***!
-  \****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
-
-
-
-
-function Checkbox(props) {
-  const arr = props.data;
-  console.log(arr);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: props.viewPass
-  }, "Pass"));
-}
-
-function mapStateToProps(state) {
-  console.log(state.box);
-  return {
-    box: state.box
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    viewPass: () => dispatch({
-      type: 'CHANGE_BOX',
-      box: 'pass'
-    })
-  };
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Checkbox));
-{
-  /* <div>
-   <button className={className} onClick={() => { superButton(); setCount(count + 1); resetCount() }}>{marker}</button>
-  </div>
-  <div>
-   <button className={className} onClick={() => { superButton(); setCount(count + 1); resetCount() }}>{marker}</button>
-  </div> */
-} // const [count, setCount] = useState(1);
-// const [className, setClassName] = useState('neutral');
-// const [marker, setMarker] = useState('neutral');
-//   const superButton = () => {
-//     if (count == 0) {
-//       setClassName('neutral')
-//       setMarker('neutral')
-//     } else if (count == 1) {
-//       setClassName('pass')
-//       setMarker('pass')
-//     } else if (count == 2) {
-//       setClassName('fail')
-//       setMarker('fail')
-//     }
-//   }
-//   const resetCount = () => {
-//     if (count >= 2) {
-//       setCount(0)
-//     }
-//   }
-// const magicButton = () => {
-//   for (let i = 0; i < arr.length; arr[i]++) {
-//     if (arr[i] == 'neutral') {
-//       // setCount(0)
-//       // setClassName('neutral')
-//       // setMarker('neutral')
-//       console.log('NEUTRAL')
-//     } else if (arr[i] == 'pass') {
-//       // setCount(1)
-//       // setClassName('pass')
-//       // setMarker('pass')
-//       console.log('PASS')
-//     } else if (arr[i] == 'fail') {
-//       // setCount(3)
-//       // setClassName('fail')
-//       // setMarker('fail')
-//       console.log('FAIL')
-//     } else break
-//   }
-// }
-//       } 
-//     console.log(i)
-//     }
-//   }
 
 /***/ }),
 

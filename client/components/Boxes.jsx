@@ -12,19 +12,21 @@ class Boxes extends React.Component {
             })
     }
 
+    handelClick (currentIndex) {
+        console.log(currentIndex)
+    }
+
     render() {
-        // console.log(this.props.boxes[0]?.boxes[0]) optional chaining operator (if true then keep going)
-        //console.log(this.props.boxes[0])
         return (
             <>
             <div>
                 <ul>
-                    {this.props.boxes.map(list => <li key={list}> 
-                        <button>{list.boxes[0]}</button>
-                        <button>{list.boxes[1]}</button>
-                        <button>{list.boxes[2]}</button>
-                        <button>{list.boxes[3]}</button>
-                        <button>{list.boxes[4]}</button>
+                {this.props.boxes.map((list, index) => <li key={index}> 
+                        <button onClick={() => {this.handelClick(0)}}>{list.boxes[0]}</button>
+                        <button onClick={() => {this.handelClick(1)}}>{list.boxes[1]}</button>
+                        <button onClick={() => {this.handelClick(2)}}>{list.boxes[2]}</button>
+                        <button onClick={() => {this.handelClick(3)}}>{list.boxes[3]}</button>
+                        <button onClick={() => {this.handelClick(4)}}>{list.boxes[4]}</button>
                     </li>)}
                 </ul>
             </div>
@@ -41,7 +43,3 @@ console.log(state.boxes)
 }
 
 export default connect(mapStateToProps)(Boxes)
-
-
-{/* {this.props.boxes[0]?.boxes[0]} */}
-
