@@ -198,52 +198,94 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../api */ "./client/api/index.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
+ // var WWW = 'neutral'
+// var balls = "1,2,2,3,34,4,4,5,5,5,5,99"
+// var sack = JSON.parse(balls, array)
 
 class Boxes extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
-  componentDidMount() {
-    Object(_api__WEBPACK_IMPORTED_MODULE_2__["fetchBoxes"])().then(boxes => {
-      this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["receiveBoxes"])(boxes));
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "state", {
+      boxState0: ['pass', 'pass', 'pass', 'pass', 'pass'],
+      boxState1: ['fail', 'fail', 'fail', 'fail', 'fail'],
+      boxState2: ['neutral', 'neutral', 'neutral', 'neutral', 'neutral']
     });
   }
 
-  handelClick(currentIndex) {
-    console.log(currentIndex);
+  componentDidMount() {
+    Object(_api__WEBPACK_IMPORTED_MODULE_2__["fetchBoxes"])().then(boxes => {
+      this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["receiveBoxes"])(boxes));
+    }).then(() => {
+      let row = 0;
+      let a = this.state.boxState0.slice;
+      a = this.props.boxes[`${row}`].boxes;
+      this.setState({
+        boxState: a
+      }); // var array = JSON.parse('[' + this.props.boxes[0].boxes + ']')
+      // console.log(array)
+    });
+  }
+
+  handelClick(rowIndex, columnIndex, ref) {
+    let boxSelector = `boxState${+rowIndex + '[' + columnIndex + ']'}`;
+    let advancedBoxSelector = `this.state.boxState${+rowIndex + '[' + columnIndex + ']'}`;
+    console.log(boxSelector);
+    console.log(eval(advancedBoxSelector));
+    console.log(ref); //should use window.Function for security purposes
+
+    if (eval(advancedBoxSelector) === 'neutral') {
+      this.setState({
+        boxSelector: 'pass'
+      });
+      ref.style = {
+        backgroundColor: 'green'
+      };
+    } else if (eval(advancedBoxSelector) === 'pass') {
+      this.setState({
+        boxSelector: 'fail'
+      });
+      this.setState({
+        boxColor: 'red'
+      });
+    } else if (eval(advancedBoxSelector) === 'fail') {
+      this.setState({
+        boxSelector: 'neutral'
+      });
+      this.setState({
+        boxColor: 'white'
+      });
+    } else console.log("error");
   }
 
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.boxes.map((list, index) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-      key: index
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      onClick: () => {
-        this.handelClick(0);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.boxes.map((list, rowIndex) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: rowIndex
+    }, console.log('rowIndex: ' + rowIndex), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      style: {
+        display: 'flex'
       }
-    }, list.boxes[0]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, list.boxes.map((item, columnIndex) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: columnIndex
+    }, console.log('columnIndex: ' + columnIndex), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      ref: rowIndex + columnIndex,
       onClick: () => {
-        this.handelClick(1);
+        this.handelClick(rowIndex, columnIndex);
+      },
+      style: {
+        backgroundColor: `${this.state.boxColor}`
       }
-    }, list.boxes[1]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      onClick: () => {
-        this.handelClick(2);
-      }
-    }, list.boxes[2]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      onClick: () => {
-        this.handelClick(3);
-      }
-    }, list.boxes[3]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      onClick: () => {
-        this.handelClick(4);
-      }
-    }, list.boxes[4]))))));
+    }, item)))))))));
   }
 
 }
 
 function mapStateToProps(state) {
-  console.log(state.boxes);
   return {
     boxes: state.boxes
   };
