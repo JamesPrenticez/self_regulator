@@ -7,11 +7,10 @@ import {receiveBoxes} from '../actions'
 
 // var balls = "1,2,2,3,34,4,4,5,5,5,5,99"
 // var sack = JSON.parse(balls, array)
-class Boxes extends React.Component { 
-        state = {
-            boxState0: ['pass', 'pass', 'pass', 'pass', 'pass'],
-            boxState1: ['fail', 'fail', 'fail', 'fail', 'fail'],
-            boxState2: ['neutral', 'neutral', 'neutral', 'neutral', 'neutral'],
+class Boxes extends React.Component {     
+    state = {
+            boxState: [],
+            boxColor: 'yellow',
         }
 
     componentDidMount() {
@@ -20,10 +19,10 @@ class Boxes extends React.Component {
                 this.props.dispatch(receiveBoxes(boxes))
             })
             .then(()=>{
-                let row = 0
-                let a = this.state.boxState0.slice
-                a = this.props.boxes[`${row}`].boxes
-                this.setState({boxState: a})
+
+                let boxArray = this.state.boxState.slice
+                boxArray = this.props.boxes
+                this.setState({boxState: boxArray})
 
                 // var array = JSON.parse('[' + this.props.boxes[0].boxes + ']')
                 // console.log(array)
@@ -31,29 +30,52 @@ class Boxes extends React.Component {
             })
     }
 
-    handelClick (rowIndex, columnIndex, ref) {
-        let boxSelector = `boxState${+rowIndex+'['+columnIndex+']'}`
-        let advancedBoxSelector = `this.state.boxState${+rowIndex+'['+columnIndex+']'}`
+    handelClick (rowIndex, columnIndex) {
+        let rc = `${rowIndex+ '' + columnIndex}` //wdf is this math..?
+        let currentBox = document.getElementById(rc)
+        let boxStateSelector = `this.state.boxState[${+rowIndex+']'+'?.boxes'+'['+columnIndex+']'}`
 
-        console.log(boxSelector)
-        console.log(eval(advancedBoxSelector))
-        console.log(ref)
-        //should use window.Function for security purposes
+        let dog = [...this.state.boxState] //1
+        let cat = {...dog[rowIndex].boxes}//2
+        let item = cat[columnIndex]
 
-        if (eval(advancedBoxSelector) === 'neutral'){
-            this.setState({boxSelector: 'pass'})
-            ref.style={backgroundColor: 'green'}
-        } else if (eval(advancedBoxSelector) === 'pass'){
-            this.setState({boxSelector: 'fail'})
-            this.setState({boxColor: 'red'})
-        } else if (eval(advancedBoxSelector) === 'fail'){
-            this.setState({boxSelector: 'neutral'})
-            this.setState({boxColor: 'white'})
-        } else  console.log("error")
+        console.log(this.state.boxState)
+
+
+        // console.log(currentBox.style)
+        // console.log(this.state.boxState[rowIndex]?.boxes[columnIndex])
+        // console.log(rc)
+        // console.log(eval(boxStateSelector))
+        // console.log(ref)
+        // should use window.Function for security purposes
+
+        if (eval(boxStateSelector) == 'neutral'){
+            item = 'pass'
+            cat[columnIndex] = item
+            dog[rowIndex] = cat
+            this.setState({boxState: dog})
+            currentBox.style.backgroundColor = 'green'
+
+        // } else if (eval(boxStateSelector) == 'pass'){
+        //     this.item = 'fail'
+        //     items[rowIndex]?.boxes[columnIndex] = item
+        //     this.setState({items})
+        //     currentBox.style.backgroundColor = 'red'
+
+        // } else if (eval(boxStateSelector) == 'fail'){
+        //     item = 'neutral'
+        //     items[rowIndex]?.boxes[columnIndex] = item
+        //     this.setState({items})
+        //     currentBox.style.backgroundColor = 'white'
+
+        // } else  console.log("error")
+        // }
+        }
     }
 
     render() {
-        
+        // console.log(this.props.boxes)
+        // console.log(this.state.boxState[1])
          return (
             <>
             <div>
@@ -62,14 +84,13 @@ class Boxes extends React.Component {
                 
                 {this.props.boxes.map((list, rowIndex) =>
                   <li key={rowIndex}>
-                  {console.log('rowIndex: ' + rowIndex)}
 
                         <ul style={{display: 'flex'}}>
                             {list.boxes.map((item, columnIndex) =>
                                 <li key={columnIndex}>
-                                {console.log('columnIndex: ' + columnIndex)}
+                                    
                                     <button 
-                                        ref = {rowIndex+columnIndex}
+                                        id =  {rowIndex+ '' + columnIndex}
                                         onClick={() => {this.handelClick(rowIndex, columnIndex)}} 
                                         style={{backgroundColor: `${this.state.boxColor}`}}>
                                         {item}                          
@@ -85,9 +106,12 @@ class Boxes extends React.Component {
     }
 }
 
+
 function mapStateToProps(state){
     return {
         boxes: state.boxes,
+        boxState: state.boxState,
+        boxColor: state.boxColor
     }
 }
 

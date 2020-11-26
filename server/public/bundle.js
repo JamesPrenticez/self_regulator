@@ -198,6 +198,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../api */ "./client/api/index.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -212,9 +216,8 @@ class Boxes extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
     super(...args);
 
     _defineProperty(this, "state", {
-      boxState0: ['pass', 'pass', 'pass', 'pass', 'pass'],
-      boxState1: ['fail', 'fail', 'fail', 'fail', 'fail'],
-      boxState2: ['neutral', 'neutral', 'neutral', 'neutral', 'neutral']
+      boxState: [],
+      boxColor: 'yellow'
     });
   }
 
@@ -222,58 +225,68 @@ class Boxes extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
     Object(_api__WEBPACK_IMPORTED_MODULE_2__["fetchBoxes"])().then(boxes => {
       this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["receiveBoxes"])(boxes));
     }).then(() => {
-      let row = 0;
-      let a = this.state.boxState0.slice;
-      a = this.props.boxes[`${row}`].boxes;
+      let boxArray = this.state.boxState.slice;
+      boxArray = this.props.boxes;
       this.setState({
-        boxState: a
+        boxState: boxArray
       }); // var array = JSON.parse('[' + this.props.boxes[0].boxes + ']')
       // console.log(array)
     });
   }
 
-  handelClick(rowIndex, columnIndex, ref) {
-    let boxSelector = `boxState${+rowIndex + '[' + columnIndex + ']'}`;
-    let advancedBoxSelector = `this.state.boxState${+rowIndex + '[' + columnIndex + ']'}`;
-    console.log(boxSelector);
-    console.log(eval(advancedBoxSelector));
-    console.log(ref); //should use window.Function for security purposes
+  handelClick(rowIndex, columnIndex) {
+    let rc = `${rowIndex + '' + columnIndex}`; //wdf is this math..?
 
-    if (eval(advancedBoxSelector) === 'neutral') {
+    let currentBox = document.getElementById(rc);
+    let boxStateSelector = `this.state.boxState[${+rowIndex + ']' + '?.boxes' + '[' + columnIndex + ']'}`;
+    let dog = [...this.state.boxState]; //1
+
+    let cat = _objectSpread({}, dog[rowIndex].boxes); //2
+
+
+    let item = cat[columnIndex];
+    console.log(this.state.boxState); // console.log(currentBox.style)
+    // console.log(this.state.boxState[rowIndex]?.boxes[columnIndex])
+    // console.log(rc)
+    // console.log(eval(boxStateSelector))
+    // console.log(ref)
+    // should use window.Function for security purposes
+
+    if (eval(boxStateSelector) == 'neutral') {
+      item = 'pass';
+      cat[columnIndex] = item;
+      dog[rowIndex] = cat;
       this.setState({
-        boxSelector: 'pass'
+        boxState: dog
       });
-      ref.style = {
-        backgroundColor: 'green'
-      };
-    } else if (eval(advancedBoxSelector) === 'pass') {
-      this.setState({
-        boxSelector: 'fail'
-      });
-      this.setState({
-        boxColor: 'red'
-      });
-    } else if (eval(advancedBoxSelector) === 'fail') {
-      this.setState({
-        boxSelector: 'neutral'
-      });
-      this.setState({
-        boxColor: 'white'
-      });
-    } else console.log("error");
+      currentBox.style.backgroundColor = 'green'; // } else if (eval(boxStateSelector) == 'pass'){
+      //     this.item = 'fail'
+      //     items[rowIndex]?.boxes[columnIndex] = item
+      //     this.setState({items})
+      //     currentBox.style.backgroundColor = 'red'
+      // } else if (eval(boxStateSelector) == 'fail'){
+      //     item = 'neutral'
+      //     items[rowIndex]?.boxes[columnIndex] = item
+      //     this.setState({items})
+      //     currentBox.style.backgroundColor = 'white'
+      // } else  console.log("error")
+      // }
+    }
   }
 
   render() {
+    // console.log(this.props.boxes)
+    // console.log(this.state.boxState[1])
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.boxes.map((list, rowIndex) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
       key: rowIndex
-    }, console.log('rowIndex: ' + rowIndex), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
       style: {
         display: 'flex'
       }
     }, list.boxes.map((item, columnIndex) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
       key: columnIndex
-    }, console.log('columnIndex: ' + columnIndex), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      ref: rowIndex + columnIndex,
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      id: rowIndex + '' + columnIndex,
       onClick: () => {
         this.handelClick(rowIndex, columnIndex);
       },
@@ -287,7 +300,9 @@ class Boxes extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
 
 function mapStateToProps(state) {
   return {
-    boxes: state.boxes
+    boxes: state.boxes,
+    boxState: state.boxState,
+    boxColor: state.boxColor
   };
 }
 
